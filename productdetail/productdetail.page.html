@@ -1,0 +1,126 @@
+<ion-header color="primary">
+
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start" *ngIf="!showAddWishList">
+            <ion-button (click)="back()" style=" height: 44px; width: 60px; margin-top: -3px;">
+                <ion-icon src="../../assets/icon/back.svg" style="width: 100%;height: 100%;"></ion-icon>
+            </ion-button>
+            <!--<ion-back-button defaultHref="/tabs/tab1"-->
+            <!--src="../../assets/icon/back.svg"  color="light"-->
+            <!--&gt;-->
+            <!--</ion-back-button>-->
+        </ion-buttons>
+
+        <ion-buttons slot="start" *ngIf="showAddWishList">
+            <ion-button (click)="showAddWishlist()" style=" height: 44px; width: 60px; margin-top: -3px;">
+                <ion-icon src="../../assets/icon/back.svg" style="width: 100%;height: 100%;"></ion-icon>
+            </ion-button>
+            <!--<ion-back-button defaultHref="/tabs/tab1"-->
+            <!--src="../../assets/icon/back.svg"  color="light"-->
+            <!--&gt;-->
+            <!--</ion-back-button>-->
+        </ion-buttons>
+
+        <ion-text style="font-weight: bold"  >{{product.name}}</ion-text>
+
+
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <div *ngIf="!showAddWishList">
+        <div>
+            <ion-slides pager="true" style="    height: 251px;" [options]="slideOpts">
+                <ion-slide *ngFor="let image of product.images">
+                    <img src="{{image.__upload_file_details.image.url}}">
+                </ion-slide>
+
+                <ion-slides pager="true" [options]="slideOpts">
+                    <img src="../../assets/img/no-image-icon.jpg" *ngIf="product.images==null">
+                </ion-slides>
+            </ion-slides>
+
+        </div>
+        <div>
+            <!--<ion-item ngClass="not-read">-->
+                <ion-grid>
+                    <ion-row>
+
+                        <ion-col col-12 class="subject">
+                            <ion-grid>
+                                <ion-row text-center><ion-col size="12" text-center><i>Description of the product goes here</i></ion-col></ion-row>
+                                <ion-row *ngFor="let field of product.fields" class="new_category">
+                                    <ion-col size="4">{{field[0].name}}:</ion-col>
+                                    <ion-col size="8"><strong><span class="value"> {{field[0].value}}</span></strong></ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+
+                    </ion-row>
+                    <ion-row>
+
+                    </ion-row>
+                </ion-grid>
+            <!--</ion-item>-->
+
+
+            <div padding  text-center>
+                <ion-button  text-center class="login" expand="full" style="width:175px; margin: auto;" color="primary" (click)="showAddWishlist(true)">ADD TO WISH LIST
+                </ion-button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showAddWishList">
+
+        <!--<ion-item>-->
+            <!--<ion-label>Choose a wish list</ion-label>-->
+            <!--<ionic-selectable #mySelect-->
+                              <!--[(ngModel)]="Wish"-->
+                              <!--[items]="wishlists"-->
+                              <!--itemValueField="id"-->
+                              <!--itemTextField="name"-->
+                              <!--[canSearch]="true"-->
+                              <!--(onChange)="wishChange($event)">-->
+            <!--</ionic-selectable>-->
+        <!--</ion-item>-->
+        <ion-grid>
+            <ion-row><ion-col style="    font-size: 20px; margin-left: 22px; margin-top:20px;">Choose a wish list</ion-col></ion-row>
+            <ion-row *ngFor="let wishlist of wishlists" (click)="wishChange(wishlist)">
+                <ion-col style="margin-left: 22px;">
+                    <ion-item>
+                        <ion-label>{{wishlist.name}}</ion-label>
+                        <ion-radio slot="start" value="biff" ></ion-radio>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="showAddWishList">
+    <ion-toolbar>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+
+                    <ion-label position="floating">Quantity</ion-label>
+                    <ion-input type="number" [(ngModel)]="quantity" name="quantity"></ion-input>
+
+                </ion-item>
+
+            </ion-col>
+            <ion-col style="margin: auto">
+                <ion-button class="grad-button" expand="block"  [attr.disabled]="wishlitId&&quantity? null:true"  *ngIf="!showLoader" (click)="addWishList()">ADD TO WISH LIST
+
+                </ion-button>
+                <ion-button class="login" expand="full" color="primary" *ngIf="showLoader">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

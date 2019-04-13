@@ -1,0 +1,47 @@
+<ion-header color="primary">
+
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="back()" style=" height: 44px; width: 60px; margin-top: -3px;">
+                <ion-icon src="../../assets/icon/back.svg" style="width: 100%;height: 100%;"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-text style="font-weight: bold">CREATE WISHLIST</ion-text>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form>
+        <ion-list>
+
+            <div padding></div>
+
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" [(ngModel)]="wishlist.name" name="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-textarea [(ngModel)]="wishlist.description" name="description"></ion-textarea>
+            </ion-item>
+
+
+        </ion-list>
+
+        <div padding>
+
+            <ion-button *ngIf="!showLoader" text-center class="login" expand="full" style="width:175px; margin: auto;"
+                        color="primary" (click)="create()">CREATE
+            </ion-button>
+
+            <ion-button *ngIf="showLoader" text-center class="login" expand="full" style="width:175px; margin: auto;"
+                        color="primary">
+                <ion-spinner name="crescent"></ion-spinner>
+            </ion-button>
+
+
+        </div>
+    </form>
+
+</ion-content>

@@ -1,0 +1,110 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title style="font-weight: bold">
+            WISHLIST
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-fab vertical="bottom" horizontal="end" (click)="newWishlist()" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <!--<ion-segment>-->
+    <!--<ion-segment-button checked *ngIf="segment" (ionSelect)="segmentButtonClicked(true)">-->
+    <!--<ion-label>Created by me</ion-label>-->
+    <!--</ion-segment-button>-->
+    <!--<ion-segment-button  *ngIf="!segment" (ionSelect)="segmentButtonClicked(true)">-->
+    <!--<ion-label>Created by me</ion-label>-->
+    <!--</ion-segment-button>-->
+
+    <!--<ion-segment-button checked *ngIf="!segment" (ionSelect)="segmentButtonClicked(false)">-->
+    <!--<ion-label>Shared with me</ion-label>-->
+    <!--</ion-segment-button>-->
+
+    <!--<ion-segment-button  *ngIf="segment" (ionSelect)="segmentButtonClicked(false)">-->
+    <!--<ion-label>Shared with me</ion-label>-->
+    <!--</ion-segment-button>-->
+
+    <!--</ion-segment>-->
+
+    <ion-grid style="padding: 20px;">
+        <ion-row style="   border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #8b9290;">
+            <ion-col size="9" style="font-weight: 600; ">My Wish Lists</ion-col>
+            <ion-col size="3" style="text-align: center; margin-right:0px;padding-right: 0px;">Share with vendor</ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="created_by_me" style="height:35%;    overflow-y: auto;">
+        <ion-item ngClass="not-read" *ngFor="let wishlist of wishlists" style="--border-color: #ffff;" lines="none">
+            <ion-grid style="margin:0;padding:0">
+                <ion-row style="margin:0;padding:0">
+                    <ion-col col-12 class="subject" style="margin:0;padding:0">
+                        <ion-grid style="margin:0;padding:0">
+                            <ion-row (click)="ShowWishList(wishlist)">
+
+                                <ion-col size="9">
+                                    <span class="value" style="font-weight: 400; font-weight: 500; font-size: 17px;">{{wishlist.name}}</span>
+                                    <span class="value" style="font-style: italic; font-size: 13px; width: 100%; float: left;">{{wishlist.description}}</span></ion-col>
+
+                                <ion-col size="3" style="margin: auto;">
+                                    <ion-toggle (ionChange)="shareStatus(wishlist)"
+                                                [(ngModel)]="wishlist.vendor.status"></ion-toggle>
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-grid>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-grid>
+        </ion-item>
+    </div>
+
+    <div class="shared_with_me" style="height:35%;     overflow-y: auto;">
+        <ion-grid style="padding: 20px;">
+            <ion-row style="    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #8b9290;">
+                <ion-col size="9" style="font-weight: 600; ">Shared Wish Lists</ion-col>
+                <ion-col size="3"></ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-item ngClass="not-read" lines="none" *ngFor="let wishlist of sharedwishlists" style="--border-color: #ffff;">
+            <ion-grid>
+                <ion-row style="margin:0;padding:0">
+                    <ion-col col-12 class="subject" style="margin:0;padding:0">
+                        <ion-grid style="margin:0;padding:0">
+                            <ion-row (click)="ShowWishList(wishlist)" style="margin:0;padding:0">
+                                <ion-col size="9" style="margin:0;padding:0">
+                                    <span class="value"
+                                          style="width:100%;float:left; width: 100%;font-weight: 500; font-size: 17px;" >{{wishlist.name}}</span>
+                                    <span class="value" style="font-style: italic;    font-size: 13px;">{{wishlist.description}}</span>
+                                </ion-col>
+
+                                <ion-col size="3" style="margin: auto;">
+                                    <ion-toggle (ionChange)="shareStatus(wishlist)"
+                                                [(ngModel)]="wishlist.vendor.status">
+                                    </ion-toggle>
+                                </ion-col>
+
+                            </ion-row>
+
+                        </ion-grid>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-grid>
+        </ion-item>
+    </div>
+
+</ion-content>

@@ -1,0 +1,54 @@
+.talk-bubble {
+
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: auto;
+  background-color: #2d87e2;
+  color: #ffffff;
+}
+
+.tri-right.left-in:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 38px;
+  bottom: auto;
+  border: 12px solid;
+  border-color: #2d87e2  #2d87e2 transparent transparent;
+}
+
+.talktext {
+  padding: 1em;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+.talk_head {
+  text-align: center;
+  padding-top: 20px;
+  color: #047cc7;
+}
+.date{
+
+  float: right;
+  color: #d2cbcb;
+  font-size: 10px;
+}
+
+.name{
+  width: 200;
+  float: left;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-top: 15px;
+}
+
+
+
+span{
+  color: white;
+}

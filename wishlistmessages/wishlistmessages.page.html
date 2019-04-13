@@ -1,0 +1,80 @@
+<ion-header color="primary">
+
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="back()" style=" height: 44px; width: 60px; margin-top: -3px;">
+                <ion-icon src="../../assets/icon/back.svg" style="width: 100%;height: 100%;"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-text style="font-weight: bold">WISHLIST MESSAGES</ion-text>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <!--<ion-item ngClass="not-read" *ngFor="let message of wishlist.notes">-->
+        <!--<ion-grid>-->
+            <!--<ion-row>-->
+                <!--<ion-col col-8 class="subject">-->
+                    <!--<ion-grid>-->
+                        <!--<ion-row>-->
+                            <!--<ion-col size="12">-->
+                                <!--<div class="talk_head"><span class="name">{{message.author}}</span>-->
+
+                                    <!--<div class="talk-bubble tri-right left-in">-->
+
+                                    <!--<div class="talktext">-->
+                                        <!--<p> {{message.note}}</p>-->
+                                    <!--</div>-->
+
+                                        <!--<span class="date">{{message.created_at}}</span></div>-->
+                                <!--</div>-->
+                            <!--</ion-col>-->
+
+                        <!--</ion-row>-->
+
+
+                    <!--</ion-grid>-->
+                <!--</ion-col>-->
+
+
+
+            <!--</ion-row>-->
+
+        <!--</ion-grid>-->
+    <!--</ion-item>-->
+
+    <ion-card *ngFor="let message of wishlist.notes" color="primary" style="margin-bottom:">
+        <ion-card-header>
+
+            <ion-card-title>{{message.author}} </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content style="padding-left: 25px;">
+           {{message.note}}
+        </ion-card-content>
+        <span style="font-size: x-small; color:#FFFFFF;float: right;">{{message.created_at}}</span>
+
+
+    </ion-card>
+
+</ion-content>
+<ion-footer style="padding-left:16px;padding-left:16px;padding-right:16px;">
+    <ion-toolbar color="primary">
+        <ion-row color="primary">
+            <ion-col col-10 size="8" color="primary">
+                <ion-item color="primary">
+                    <ion-label position="floating">Message</ion-label>
+                    <ion-textarea [(ngModel)]="shareList.message" name="message"></ion-textarea>
+                </ion-item>
+            </ion-col>
+            <ion-col color="primary" col-2 class="ion-text-right" style="margin: auto;     margin-bottom: 0;">
+                <ion-button (click)="message()" *ngIf="!showLoader">Send</ion-button>
+                <ion-button *ngIf="showLoader">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-toolbar>
+</ion-footer>

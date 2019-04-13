@@ -1,0 +1,94 @@
+<ion-header>
+
+    <div class="search-container" *ngIf="searchActive">
+        <ion-grid class="no-margin">
+            <ion-row>
+
+                <ion-col size="1" class="arrow-icon" (click)="search(false)">
+                    <ion-icon name="arrow-back" class="arrow-back"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                    <ion-searchbar animated="true"  #searchbar [(ngModel)]="search_text"  color="light" (search)="loadDataFirst()" ></ion-searchbar>
+                </ion-col>
+            </ion-row>
+
+
+        </ion-grid>
+    </div>
+
+    <ion-toolbar color="primary" *ngIf="!searchActive">
+        <ion-title style="font-weight: bold">
+            Products
+            <div class="right">
+                <ion-icon name="search" style="zoom: 1.4" color="light" (click)="search(true)"></ion-icon>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+    <div class="product-container">
+
+        <ion-item align-self-center *ngIf="showLoader">
+            <ion-grid>
+                <ion-row>
+                    <ion-col  class="ion-text-center" style="margin: auto" >
+                        <!-- Crescent -->
+                        <ion-spinner name="crescent" color=""></ion-spinner>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+
+        <ion-item ngClass="not-read" *ngFor="let product of products" (click)="showProduct(product)" class="padding-top-bottom-0">
+            <ion-grid  class="padding-top-bottom-0">
+
+
+
+                    <ion-row>
+                        <ion-col col-12 ><strong style="font-size: 14px;" >{{product.name}}</strong></ion-col>
+
+                    </ion-row>
+
+
+                <ion-row  class="padding-top-bottom-0">
+                    <ion-col size="4">
+                        <img src="../../assets/img/no-image-icon.jpg" style=" " *ngIf="product.image==null">
+                        <img src="{{product.image}}"  style=" margin-top: 17px;"  *ngIf="product.image!=null">
+                    </ion-col>
+                    <ion-col col-8 class="subject">
+                        <ion-grid>
+                                <ion-row *ngFor="let field of product.fields" style="padding-bottom: 10px;" >
+                                <ion-col size="4" >{{field[0].name}}:</ion-col>
+                                <ion-col size="8" style="text-align: right;"><strong><span class="value"> {{field[0].value}}</span></strong></ion-col>
+                            </ion-row>
+
+                        </ion-grid>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-grid>
+        </ion-item>
+
+
+        <ion-item *ngIf="ShowNoProducts" style="margin-top:25%">
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="ion-text-center">No products found</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+                    loadingSpinner="crescent"
+                    loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+    </div>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header  *ngIf="!showcode ">
+    <ion-toolbar color="primary">
+        <ion-title style="font-weight: bold">LOGIN</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <form *ngIf="showcode ">
+        <ion-list style="    text-align: center;width: 78%; margin: auto;    margin-top: 25%;">
+          <img src="../../assets/icon/code_thanks.png">
+        </ion-list>
+        <ion-list style="text-align: center">
+            <ion-label style="font-size: 12px; font-weight: 600;">Please enter client code to continue</ion-label>
+            <input type="text" class="code " placeholder="CODE" [(ngModel)]="loginUser.code" name="code">
+            <button text-center class=" button_example"   style="    width: 196px;margin: auto;"
+                        (click)="showCode()">ENTER
+            </button>
+        </ion-list>
+    </form>
+
+    <form (submit)="login()" *ngIf="!showcode ">
+        <ion-list>
+
+            <div padding></div>
+
+            <ion-item>
+                <ion-label position="floating">NAME</ion-label>
+                <ion-input type="name" [(ngModel)]="loginUser.name" name="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">EMAIL</ion-label>
+                <ion-input type="email" [(ngModel)]="loginUser.email" name="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">MOBILE</ion-label>
+                <ion-input type="phone" [(ngModel)]="loginUser.phone" name="phone"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <div padding>
+
+            <ion-button *ngIf="!disableButton" text-center class="login " expand="full"
+                        style="width:175px; margin: auto;" color="primary" (click)="login()">LOGIN
+            </ion-button>
+            <ion-button *ngIf="disableButton" text-center class="login" expand="full" style="width:175px; margin: auto;"
+                        color="primary">
+                <ion-spinner name="crescent"></ion-spinner>
+            </ion-button>
+
+
+        </div>
+    </form>
+</ion-content>
